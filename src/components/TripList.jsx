@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {testTrips} from "./api";
+import { getTripsJson } from "../services/tripService";
 
+const fetchedTrips = await getTripsJson()
 
 // functional component ProductList, deconstruct props!
 function TripList({ addToWishlist }) {
   const [month, setMonth] = useState("");
-  const [trips] = useState(testTrips);
+  const [trips] = useState(fetchedTrips);
   const months = ["Idle", "Jan", "Feb", "March", "April", "Mai", "June"];
 
   const tripsMapped = trips.map((trip, index) => (

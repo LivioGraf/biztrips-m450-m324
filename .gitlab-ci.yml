@@ -3,14 +3,14 @@ stages:
   - build
   - deploy
 
-test project:
+test:
   stage: test
   image: node:18
   script:
     - npm install
     - npm test
 
-build project:
+build:
   stage: build
   image: node:18
   script:
@@ -20,7 +20,7 @@ build project:
     paths:
       - build/
 
-deploy project:
+deploy:
   stage: deploy
   image: node:18
   script:
