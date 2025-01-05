@@ -23,7 +23,7 @@ export default function Wishlist({ wishlist, removeFromWishlist, clearWishlist }
   );
 
   return (
-    <div className="container">
+    <div className="container" data-testid="wishlist">
       <>
         <h2 className="h4">Wishlist</h2>
         <div className="row">
