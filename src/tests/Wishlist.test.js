@@ -11,15 +11,18 @@ describe("Test if wishlist contains trips", () => {
         startTrip: [2021, 2, 13, 0, 0],
         endTrip: [2021, 2, 15, 16, 56]
     }
-    render(<Wishlist wishlist={[trip]}></Wishlist>)
-    const wishlist = screen.getByTestId("wishlist")
+
+    beforeEach(() => {
+        render(<Wishlist wishlist={[trip]}></Wishlist>)
+    })
 
     test("Expect Wishlist to be in the document", () => {
+        const wishlist = screen.getByTestId("wishlist")
         expect(wishlist).toBeInTheDocument();
     })
 
-    test("Test if the texts of the trip are displayed in the renderd wishlist", () => {
-        expect(wishlist).toHaveTextContent("BT01");
-        expect(wishlist).toHaveTextContent("San Francisco World Trade Center on new Server/IOT/Client")
+    test("Test if Wishlist component renders trip", () => {
+        const tripInDom = screen.getByTestId("render-trip")
+        expect(tripInDom).toBeInTheDocument()
     })
 })

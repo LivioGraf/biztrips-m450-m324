@@ -87,7 +87,7 @@ function WishlistItem(props) {
 
   // console.log("WishlistItem", item);
   return (
-    <tr key={id}>
+    <tr key={id} data-testid="render-trip">
       <td>
         <figure className="media">
 
