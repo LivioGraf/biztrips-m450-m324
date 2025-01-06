@@ -32,4 +32,13 @@ describe("Trip Tests", () => {
         const renderedTitle = await screen.findByTestId("render-title")
         expect(renderedTitle).toBeInTheDocument()
     })
+
+    test("if trip contains description", async () => {
+        tripService.getTripsJson.mockResolvedValueOnce(tripMock);
+
+        render(<TripList addToWishlist={addToWishlistMock} />);
+
+        const renderedDescription = await screen.findByTestId("render-description")
+        expect(renderedDescription).toBeInTheDocument()
+    })
 });

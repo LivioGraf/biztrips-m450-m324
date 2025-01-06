@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getTripsJson } from "../services/tripService";
-
-const fetchedTrips = await getTripsJson()
 
 // functional component ProductList, deconstruct props!
 function TripList({ addToWishlist }) {
   const [month, setMonth] = useState("");
-  const [trips] = useState(fetchedTrips);
+  const [trips, setTrips] = useState([]);
   const months = ["Idle", "Jan", "Feb", "March", "April", "Mai", "June"];
+
+  useEffect(() => {
+    const fetchTrips = async () => {
+        try {
+            const fetchedTrips = await getTripsJson();
+            setTrips(fetchedTrips);
+        } catch (error) {
+            console.error("Error fetching trips:", error);
+        }
+    };
+
+    fetchTrips();
+}, []);
 
   const tripsMapped = trips.map((trip, index) => (
     <Trip addToWishlist={addToWishlist} trip={trip} key={trip.id} />
@@ -73,14 +84,14 @@ function Trip({ addToWishlist, ...props }) {
       <figure className="card card-product">
 
         <div className="img-wrap">
-          <img src={"images/items/" + trip.id + ".jpg"} alt="name " />
+          <img data-testid="render-img" src={"images/items/" + trip.id + ".jpg"} alt="name " />
         </div>
         <figcaption className="info-wrap">
-          <h6 className="title">
+          <h6 className="title" data-testid="render-title">
               {id}  {title} {trip.startTrip} {trip.endTrip}
           </h6>
 
-          <p className="card-text">{description}</p>
+          <p className="card-text" data-testid="render-description">{description}</p>
           <div className="info-wrap row">
             <button
               type="button"
