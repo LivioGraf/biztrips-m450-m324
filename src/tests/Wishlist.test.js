@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react"
 import '@testing-library/jest-dom'
 import Wishlist from "../components/Wishlist"
 
-describe("Test if wishlist contains trips", () => {
+describe("Wishlist Tests", () => {
     // (Maybe setup some mock-data)
     const trip = {
         id: 1,
@@ -12,17 +12,21 @@ describe("Test if wishlist contains trips", () => {
         endTrip: [2021, 2, 15, 16, 56]
     }
 
-    beforeEach(() => {
-        render(<Wishlist wishlist={[trip]}></Wishlist>)
-    })
-
     test("Expect Wishlist to be in the document", () => {
+        render(<Wishlist wishlist={[trip]}></Wishlist>)
         const wishlist = screen.getByTestId("wishlist")
         expect(wishlist).toBeInTheDocument();
     })
 
-    test("Test if Wishlist component renders trip", () => {
+    test("if Wishlist component renders trip", () => {
+        render(<Wishlist wishlist={[trip]}></Wishlist>)
         const tripInDom = screen.getByTestId("render-trip")
         expect(tripInDom).toBeInTheDocument()
+    })
+
+    test("if Wishlist shows empty message", () => {
+        render(<Wishlist wishlist={[]}></Wishlist>)
+        const emptyText = screen.getByText("Wishlist is empty")
+        expect(emptyText).toBeInTheDocument()
     })
 })
