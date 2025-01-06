@@ -17,7 +17,7 @@ export default function Wishlist({ wishlist, removeFromWishlist, clearWishlist }
     <tr>
       <td colSpan="4">
         {" "}
-        <p className="alert alert-info">Wishlist is empty</p>
+        <p className="alert alert-info" data-testid="empty-text">Wishlist is empty</p>
       </td>
     </tr>
   );
@@ -62,6 +62,7 @@ export default function Wishlist({ wishlist, removeFromWishlist, clearWishlist }
                         className="btn btn-outline-danger"
                         onClick={clearWishlist}
                         disabled={itemsMapped.length === 0}
+                        data-testid="empty-wishlist"
                       >
                         empty wishlist
                       </button>

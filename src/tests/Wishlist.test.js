@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import '@testing-library/jest-dom'
 import Wishlist from "../components/Wishlist"
 
@@ -28,5 +28,16 @@ describe("Wishlist Tests", () => {
         render(<Wishlist wishlist={[]}></Wishlist>)
         const emptyText = screen.getByText("Wishlist is empty")
         expect(emptyText).toBeInTheDocument()
+    })
+
+    test("if empty wishlist button works", () => {
+        const clearWishlistMock = jest.fn();
+
+        render(<Wishlist wishlist={[trip]} clearWishlist={clearWishlistMock}></Wishlist>)
+
+        const button = screen.getByTestId("empty-wishlist")
+        fireEvent.click(button)
+
+        expect(clearWishlistMock).toHaveBeenCalledTimes(1);
     })
 })
