@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import TripList from "../components/TripList";
 import * as tripService from "../services/tripService";
 
@@ -41,4 +41,17 @@ describe("Trip Tests", () => {
         const renderedDescription = await screen.findByTestId("render-description")
         expect(renderedDescription).toBeInTheDocument()
     })
+
+    test("if button click adds trip to wishlist", async () => {
+          tripService.getTripsJson.mockResolvedValueOnce(tripMock);
+        
+          render(<TripList addToWishlist={addToWishlistMock} />);
+        
+          const addToWishlistButton = await screen.findByText(/add to wishlist/i);
+        
+          fireEvent.click(addToWishlistButton);
+        
+          expect(addToWishlistMock).toHaveBeenCalledTimes(1);
+          expect(addToWishlistMock).toHaveBeenCalledWith(tripMock[0]);
+    });
 });
