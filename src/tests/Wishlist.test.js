@@ -40,4 +40,25 @@ describe("Wishlist Tests", () => {
 
         expect(clearWishlistMock).toHaveBeenCalledTimes(1);
     })
+
+    test("if remove item works", () => {
+        const mockItem = [{
+            id: 1,
+            title: "BT01",
+            description: "San Francisco World Trade Center on new Server/IOT/Client",
+            startTrip: [2021, 2, 13, 0, 0],
+            endTrip: [2021, 2, 15, 16, 56]
+        }]
+
+        const mockRemoveFromWishlist = jest.fn();
+
+        render(<Wishlist wishlist={mockItem} removeFromWishlist={mockRemoveFromWishlist} />)
+
+        const deleteButton = screen.getByText("delete Item");
+
+        fireEvent.click(deleteButton);
+
+        expect(mockRemoveFromWishlist).toHaveBeenCalledTimes(1);
+        expect(mockRemoveFromWishlist).toHaveBeenCalledWith(mockItem[0]);
+    })
 })
