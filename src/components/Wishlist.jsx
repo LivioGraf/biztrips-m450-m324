@@ -5,11 +5,10 @@ export default function Wishlist({ wishlist, removeFromWishlist, clearWishlist }
 
   // as constant variant 2
   const itemsMapped = wishlist.map((item, index) => (
-
     <WishlistItem
       removeFromWishlist={removeFromWishlist}
       item={item}
-      key={index}
+      key={item.id}
     />
   ));
 
@@ -83,6 +82,7 @@ function WishlistItem(props) {
   const { removeFromWishlist, item } = props;
   // props
   let { id, title, description, startTrip, endTrip } = item;
+  console.log("item: ", item)
 
   console.log("WishlistItem", props);
 
@@ -118,10 +118,10 @@ function WishlistItem(props) {
         <i className="fa-regular fa-heart"></i>
         <button
           className="btn btn-outline-danger"
-          // onClick={ () => removeFromWishlist(props.item) } // App deleteItem
+          onClick={ () => removeFromWishlist(item) } // App deleteItem
 
 
-            onClick={(item) => removeFromWishlist(item)}
+            // onClick={(item) => removeFromWishlist(item)}
         >
           delete Item
         </button>
