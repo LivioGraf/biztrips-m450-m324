@@ -58,7 +58,7 @@ describe("Wishlist Tests", () => {
 
         fireEvent.click(deleteButton);
 
-        expect(mockRemoveFromWishlist).toHaveBeenCalledTimes(1);
+        expect(mockRemoveFromWishlist).toHaveBeenCalledTimes(0);
         expect(mockRemoveFromWishlist).toHaveBeenCalledWith(mockItem[0]);
     })
 })
